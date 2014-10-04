@@ -1,7 +1,5 @@
 package fpinscala.gettingstarted
 
-import java.util
-
 import org.scalatest._
 
 class PolymorphicFunctionsTest extends FlatSpec with Matchers {
