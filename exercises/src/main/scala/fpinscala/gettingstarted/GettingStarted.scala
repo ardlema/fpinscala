@@ -36,7 +36,12 @@ object MyModule {
 
   // Exercise 1: Write a function to compute the nth fibonacci number
 
-  def fib(n: Int): Int = 0
+  def fib(n: Int): Int = {
+    def fibonacci(n: Int, previous: Int, current: Int): Int =
+      if (n == 0) previous
+      else fibonacci(n - 1, current, previous + current)
+    fibonacci(n, 0, 1)
+  }
 
   // This definition and `formatAbs` are very similar..
   private def formatFactorial(n: Int) = {
@@ -129,6 +134,7 @@ object PolymorphicFunctions {
 
   // Exercise 2: Implement a polymorphic function to check whether
   // an `Array[A]` is sorted
+  @annotation.tailrec
   def isSorted[A](as: Array[A], gt: (A,A) => Boolean): Boolean = {
     as.length match {
       case 0 | 1 => true
