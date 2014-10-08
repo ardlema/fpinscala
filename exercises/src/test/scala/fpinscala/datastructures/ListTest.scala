@@ -22,4 +22,23 @@ class ListTest extends FlatSpec with Matchers {
     myListWithoutFirstElement should be(Nil)
   }
 
+  it should "replace the first element of a List with values" in {
+    val myList = List(1,2,3)
+    val myListWithTheFirstElementReplaced = List.setHead(myList, 5)
+    myListWithTheFirstElementReplaced should be(List(5,2,3))
+  }
+
+  it should "replace the first element of a List with one element" in {
+    val myList = List(1)
+    val myListWithTheFirstElementReplaced = List.setHead(myList, 5)
+    myListWithTheFirstElementReplaced should be(List(5))
+  }
+
+  it should "return Nil when trying to replace the first element of an empty list" in {
+    val myList = List()
+    intercept[RuntimeException] {
+      List.setHead(myList, 5)
+    }
+  }
+
 }
