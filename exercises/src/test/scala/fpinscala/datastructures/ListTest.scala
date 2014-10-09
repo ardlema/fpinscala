@@ -58,4 +58,22 @@ class ListTest extends FlatSpec with Matchers {
     val myListWithTheFirstNElementsRemoved = List.drop(myList, 5)
     myListWithTheFirstNElementsRemoved should be(List())
   }
+
+  it should "remove elements from the list prefix as long as they match a predicate" in {
+    val myList = List(3, 4, 5, 6)
+    val myListWithTheFirstNElementsRemoved = List.dropWhile(myList, (x: Int) => x < 5)
+    myListWithTheFirstNElementsRemoved should be(List(5, 6))
+  }
+
+  it should "remove no elements from the list when there is no element that match the predicate" in {
+    val myList = List(3, 4, 5, 6)
+    val myListWithTheFirstNElementsRemoved = List.dropWhile(myList, (x: Int) => x > 20)
+    myListWithTheFirstNElementsRemoved should be(List(3, 4, 5, 6))
+  }
+
+  it should "remove no elements from an empty list" in {
+    val myList = List()
+    val myListWithTheFirstNElementsRemoved = List.dropWhile(myList, (x: Int) => x > 20)
+    myListWithTheFirstNElementsRemoved should be(List())
+  }
 }
