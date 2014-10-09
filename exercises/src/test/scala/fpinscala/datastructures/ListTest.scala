@@ -76,4 +76,16 @@ class ListTest extends FlatSpec with Matchers {
     val myListWithTheFirstNElementsRemoved = List.dropWhile(myList, (x: Int) => x > 20)
     myListWithTheFirstNElementsRemoved should be(List())
   }
+
+  it should "remove all but the last element of the list" in {
+    val myList = List(3, 5, 8, 9)
+    val myListWithJustTheLastElement = List.init(myList)
+    myListWithJustTheLastElement should be(List(9))
+  }
+
+  it should "remove no elements from an empty list after calling init" in {
+    val myList = List()
+    val myListWithJustTheLastElement = List.init(myList)
+    myListWithJustTheLastElement should be(List())
+  }
 }
