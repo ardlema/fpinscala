@@ -41,4 +41,21 @@ class ListTest extends FlatSpec with Matchers {
     }
   }
 
+  it should "drop the first n elements of the list" in {
+    val myList = List(3, 4, 5, 6)
+    val myListWithTheFirstNElementsRemoved = List.drop(myList, 2)
+    myListWithTheFirstNElementsRemoved should be(List(5, 6))
+  }
+
+  it should "drop no elements of the list when the number of elements to be removed is 0" in {
+    val myList = List(3, 4, 5, 6)
+    val myListWithTheFirstNElementsRemoved = List.drop(myList, 0)
+    myListWithTheFirstNElementsRemoved should be(List(3, 4, 5, 6))
+  }
+
+  it should "ignore the number of elements to be removed when the list is empty" in {
+    val myList = List()
+    val myListWithTheFirstNElementsRemoved = List.drop(myList, 5)
+    myListWithTheFirstNElementsRemoved should be(List())
+  }
 }
