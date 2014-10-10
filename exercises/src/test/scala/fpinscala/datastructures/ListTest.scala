@@ -88,4 +88,12 @@ class ListTest extends FlatSpec with Matchers {
     val myListWithJustTheLastElement = List.init(myList)
     myListWithJustTheLastElement should be(List())
   }
+
+  it should "compute the lenght of a list using foldright" in {
+    val myIntegerList = List(100, 23, 34, 90, 25)
+    List.length(myIntegerList) should be(5)
+
+    val myStringList = List("string1")
+    List.length(myStringList) should be(1)
+  }
 }
