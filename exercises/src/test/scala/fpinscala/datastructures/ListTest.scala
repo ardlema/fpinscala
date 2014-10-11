@@ -104,4 +104,22 @@ class ListTest extends FlatSpec with Matchers {
     val myIntegerList2 = List(3, 4, 2)
     List.foldLeft(myIntegerList2, 1)(_ * _) should be(24)
   }
+
+  it should "add the elements of the list using foldleft" in {
+    val myIntegerList = List(3, 4, 7)
+    List.sumWithFoldLeft(myIntegerList) should be(14)
+  }
+
+  it should "compute the product of the list using foldleft" in {
+    val myDoubleList = List(2.0, 4.0, 7.0)
+    List.productWithFoldLeft(myDoubleList) should be(56)
+  }
+
+  it should "compute the list of a list using foldleft" in {
+    val myDoubleList = List(2.0, 4.0, 7.0)
+    List.lengthWithFoldLeft(myDoubleList) should be(3)
+
+    val myStringList = List("string1", "string2")
+    List.lengthWithFoldLeft(myStringList) should be(2)
+  }
 }
