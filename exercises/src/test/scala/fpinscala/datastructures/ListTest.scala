@@ -96,4 +96,12 @@ class ListTest extends FlatSpec with Matchers {
     val myStringList = List("string1")
     List.length(myStringList) should be(1)
   }
+
+  it should "compute the foldleft properly" in {
+    val myIntegerList = List(3, 4, 7)
+    List.foldLeft(myIntegerList, 0)(_ + _) should be(14)
+
+    val myIntegerList2 = List(3, 4, 2)
+    List.foldLeft(myIntegerList2, 1)(_ * _) should be(24)
+  }
 }
