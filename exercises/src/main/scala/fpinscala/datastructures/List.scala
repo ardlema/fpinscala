@@ -3,6 +3,8 @@ package fpinscala.datastructures
 import scala._
 import fpinscala.datastructures.Cons
 import fpinscala.datastructures.Cons
+import fpinscala.datastructures.Cons
+import fpinscala.datastructures.Cons
 
 sealed trait List[+A] // `List` data type, parameterized on a type, `A`
 case object Nil extends List[Nothing] // A `List` data constructor representing the empty list
@@ -122,4 +124,6 @@ object List { // `List` companion object. Contains functions for creating and wo
   def convertDoubleToString(l: List[Double]): List[String] = foldRight(l, List[String]())((elem, tail) => Cons(elem.toString, tail))
 
   def map[A,B](l: List[A])(f: A => B): List[B] = foldRightViaFoldLeft(l, List[B]())((elem, tail) => Cons(f(elem), tail))
+
+  def filter[A](as: List[A])(f: A => Boolean): List[A] = foldRight(as, List[A]())((elem, tail) => if (f(elem)) Cons(elem, tail) else tail)
 }

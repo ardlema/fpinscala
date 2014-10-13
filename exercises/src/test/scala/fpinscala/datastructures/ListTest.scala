@@ -187,4 +187,11 @@ class ListTest extends FlatSpec with Matchers {
     myStringList should be(List(2.0, 4.0, 6.0))
   }
 
+  it should "filter elements from a list" in {
+    val myIntegerList = List(1, 2, 3, 4, 5)
+    val myFilteredIntegerList = List.filter(myIntegerList)(a => (a % 2 != 0))
+
+    myFilteredIntegerList should be(List(1, 3, 5))
+  }
+
 }
