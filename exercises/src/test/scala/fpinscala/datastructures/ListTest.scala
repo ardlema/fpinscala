@@ -148,4 +148,12 @@ class ListTest extends FlatSpec with Matchers {
     result2 should be(18)
   }
 
+  it should "append one list to another" in {
+    val myIntegerList = List(1, 2, 3)
+    val anotherIntegerList = List(4, 5, 6)
+    val appendedList = List.appendViaFoldRight(myIntegerList, anotherIntegerList)
+
+    appendedList should be(List(1, 2, 3, 4, 5, 6))
+  }
+
 }
