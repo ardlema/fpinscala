@@ -127,4 +127,25 @@ class ListTest extends FlatSpec with Matchers {
     val myIntegerList = List(1, 2, 3)
     List.reverse(myIntegerList) should be(List(3, 2, 1))
   }
+
+  it should "implement foldright via foldleft" in {
+    val myIntegerList = List(1, 2, 3)
+    val result = List.foldRightViaFoldLeft(myIntegerList, 0)(_ + _)
+    result should be(6)
+
+    val myDoubleList = List(3.0, 2.0, 3.0)
+    val result2 = List.foldRightViaFoldLeft(myDoubleList, 1.0)(_ * _)
+    result2 should be(18)
+  }
+
+  it should "implement foldleft via foldright" in {
+    val myIntegerList = List(1, 2, 3)
+    val result = List.foldLeftViaFoldRight(myIntegerList, 0)(_ + _)
+    result should be(6)
+
+    val myDoubleList = List(3.0, 2.0, 3.0)
+    val result2 = List.foldLeftViaFoldRight(myDoubleList, 1.0)(_ * _)
+    result2 should be(18)
+  }
+
 }
