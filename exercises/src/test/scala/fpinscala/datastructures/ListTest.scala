@@ -173,5 +173,18 @@ class ListTest extends FlatSpec with Matchers {
     myIntegerListPlusOne should be(List(2, 3, 4))
   }
 
+  it should "convert a double list to string list" in {
+    val myDoubleList = List(1.0, 2.0, 3.0)
+    val myStringList = List.convertDoubleToString(myDoubleList)
+
+    myStringList should be(List("1.0", "2.0", "3.0"))
+  }
+
+  it should "apply map method to list" in {
+    val myDoubleList = List(1.0, 2.0, 3.0)
+    val myStringList = List.map(myDoubleList)(a => a * 2)
+
+    myStringList should be(List(2.0, 4.0, 6.0))
+  }
 
 }

@@ -109,7 +109,7 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def reverse[A](l: List[A]): List[A] = foldLeft(l, List[A]())((b, a) => Cons(a, b))
 
-  def foldRightViaFoldLeft[A,B](l: List[A], z: B)(f: (A,B) => B): B = foldLeft(l, z)((b, a) => f(a,b))
+  def foldRightViaFoldLeft[A,B](l: List[A], z: B)(f: (A,B) => B): B = foldLeft(reverse(l), z)((b, a) => f(a,b))
 
   def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B, A) => B): B = foldRight(l, z)((a, b) => f(b,a))
 
@@ -119,5 +119,7 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def add1(l: List[Int]): List[Int] = foldRight(l, List[Int]())((elem, tail) => Cons(elem+1, tail))
 
-  def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
+  def convertDoubleToString(l: List[Double]): List[String] = foldRight(l, List[String]())((elem, tail) => Cons(elem.toString, tail))
+
+  def map[A,B](l: List[A])(f: A => B): List[B] = foldRightViaFoldLeft(l, List[B]())((elem, tail) => Cons(f(elem), tail))
 }
