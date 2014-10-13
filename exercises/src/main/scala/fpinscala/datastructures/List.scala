@@ -1,5 +1,8 @@
 package fpinscala.datastructures
 
+import scala._
+import fpinscala.datastructures.Cons
+
 sealed trait List[+A] // `List` data type, parameterized on a type, `A`
 case object Nil extends List[Nothing] // A `List` data constructor representing the empty list
 case class Cons[+A](head: A, tail: List[A]) extends List[A] // Another data constructor, representing nonempty lists. Note that `tail` is another `List[A]`, which may be `Nil` or another `Cons`.
@@ -102,6 +105,8 @@ object List { // `List` companion object. Contains functions for creating and wo
   def productWithFoldLeft(ns: List[Double]): Double = foldLeft(ns, 1.0)(_ * _)
 
   def lengthWithFoldLeft[A](l: List[A]): Int = foldLeft(l, 0)((acc, _) => acc + 1)
+
+  def reverse[A](l: List[A]): List[A] = foldLeft(l, List[A]())((b, a) => Cons(a, b))
 
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }

@@ -122,4 +122,9 @@ class ListTest extends FlatSpec with Matchers {
     val myStringList = List("string1", "string2")
     List.lengthWithFoldLeft(myStringList) should be(2)
   }
+
+  it should "return the reverse of a list" in {
+    val myIntegerList = List(1, 2, 3)
+    List.reverse(myIntegerList) should be(List(3, 2, 1))
+  }
 }
