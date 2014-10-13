@@ -166,5 +166,12 @@ class ListTest extends FlatSpec with Matchers {
     appendedList should be(expectedList)
   }
 
+  it should "add 1 to a list of integers" in {
+    val myIntegerList = List(1, 2, 3)
+    val myIntegerListPlusOne = List.add1(myIntegerList)
+
+    myIntegerListPlusOne should be(List(2, 3, 4))
+  }
+
 
 }

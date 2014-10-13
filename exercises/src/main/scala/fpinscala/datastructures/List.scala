@@ -117,5 +117,7 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   def concat[A](l: List[List[A]]): List[A] = foldRight(l, List[A]())((a,b) => appendViaFoldRight(a, b))
 
+  def add1(l: List[Int]): List[Int] = foldRight(l, List[Int]())((elem, tail) => Cons(elem+1, tail))
+
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }
