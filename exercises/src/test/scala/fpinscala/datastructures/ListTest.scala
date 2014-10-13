@@ -156,4 +156,15 @@ class ListTest extends FlatSpec with Matchers {
     appendedList should be(List(1, 2, 3, 4, 5, 6))
   }
 
+  it should "concatenate a list of lists into a single list" in {
+    val myIntegerList = List(1, 2, 3)
+    val anotherIntegerList = List(4, 5, 6)
+    val concatenatedList = List(myIntegerList, anotherIntegerList)
+    val appendedList = List.concat(concatenatedList)
+
+    val expectedList = List(1, 2, 3, 4, 5, 6)
+    appendedList should be(expectedList)
+  }
+
+
 }
