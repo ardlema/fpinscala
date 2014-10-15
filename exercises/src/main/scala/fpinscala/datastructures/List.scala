@@ -137,4 +137,11 @@ object List { // `List` companion object. Contains functions for creating and wo
       case (Nil, _) => Nil
       case (_, Nil) => Nil
   }
+
+  def zipWith[A,B,C](a: List[A], b: List[B])(f: (A,B) => C): List[C] = (a, b) match {
+    case (Cons(headA, Nil), Cons(headB, Nil)) => Cons(f(headA, headB), Nil)
+    case (Cons(headA, tailA), Cons(headB, tailB)) => appendViaFoldRight(Cons(f(headA, headB), Nil), zipWith(tailA, tailB)(f))
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+  }
 }

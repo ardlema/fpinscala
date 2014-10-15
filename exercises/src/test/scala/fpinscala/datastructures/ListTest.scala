@@ -212,9 +212,25 @@ class ListTest extends FlatSpec with Matchers {
     val myIntegerList1 = List(1, 2, 3)
     val myIntegerList2 = List(4, 5, 6)
     val expectedIntegerList = List(5, 7, 9)
-    val myZippedIntegerList = List.addPairwise(myIntegerList1, myIntegerList2)
+    val addedPairWiseList = List.addPairwise(myIntegerList1, myIntegerList2)
+
+    addedPairWiseList should be(expectedIntegerList)
+  }
+
+  it should "construct a new list by aplying the function to corresponding elements" in {
+    val myIntegerList1 = List(8, 7, 6)
+    val myIntegerList2 = List(4, 5, 6)
+    val expectedIntegerList = List(4, 2, 0)
+    val myZippedIntegerList = List.zipWith(myIntegerList1, myIntegerList2)((a,b) => a - b)
 
     myZippedIntegerList should be(expectedIntegerList)
+
+    val myStringList1 = List("hola", "adios")
+    val myStringList2 = List("mundo", "tierra")
+    val expectedStringList = List("holamundo", "adiostierra")
+    val myZippedStringList = List.zipWith(myStringList1, myStringList2)((a,b) => a.concat(b))
+
+    myZippedStringList should be(expectedStringList)
   }
 
 }
