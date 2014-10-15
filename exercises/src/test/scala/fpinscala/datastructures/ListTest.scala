@@ -194,4 +194,18 @@ class ListTest extends FlatSpec with Matchers {
     myFilteredIntegerList should be(List(1, 3, 5))
   }
 
+  it should "apply the flatMap function to a list" in {
+    val myIntegerList = List(1, 2, 3)
+    val myFilteredIntegerList = List.flatMap(myIntegerList)(i => List(i,i))
+
+    myFilteredIntegerList should be(List(1, 1, 2, 2, 3, 3))
+  }
+
+  it should "filter elements from a list using flatMap" in {
+    val myIntegerList = List(1, 2, 3, 4, 5)
+    val myFilteredIntegerList = List.filterViaFlatMap(myIntegerList)(a => (a % 2 != 0))
+
+    myFilteredIntegerList should be(List(1, 3, 5))
+  }
+
 }
