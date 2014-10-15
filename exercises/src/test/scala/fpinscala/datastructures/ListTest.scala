@@ -208,4 +208,13 @@ class ListTest extends FlatSpec with Matchers {
     myFilteredIntegerList should be(List(1, 3, 5))
   }
 
+  it should "construct a new list by adding corresponding elements" in {
+    val myIntegerList1 = List(1, 2, 3)
+    val myIntegerList2 = List(4, 5, 6)
+    val expectedIntegerList = List(5, 7, 9)
+    val myZippedIntegerList = List.addPairwise(myIntegerList1, myIntegerList2)
+
+    myZippedIntegerList should be(expectedIntegerList)
+  }
+
 }

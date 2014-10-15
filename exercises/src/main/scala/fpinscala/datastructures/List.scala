@@ -130,4 +130,11 @@ object List { // `List` companion object. Contains functions for creating and wo
   def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = concat(map(as)(f))
 
   def filterViaFlatMap[A](l: List[A])(f: A => Boolean): List[A] = flatMap(l)(a => if (f(a)) List(a) else Nil)
+
+  def addPairwise(a: List[Int], b: List[Int]): List[Int] = (a, b) match {
+      case (Cons(headA, Nil), Cons(headB, Nil)) => Cons(headA + headB, Nil)
+      case (Cons(headA, tailA), Cons(headB, tailB)) => appendViaFoldRight(Cons(headA+headB, Nil), addPairwise(tailA, tailB))
+      case (Nil, _) => Nil
+      case (_, Nil) => Nil
+  }
 }
