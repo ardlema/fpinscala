@@ -144,4 +144,11 @@ object List { // `List` companion object. Contains functions for creating and wo
     case (Nil, _) => Nil
     case (_, Nil) => Nil
   }
+
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
+    case (_, Nil) => true
+    case (Cons(head1, tail1), Cons(head2, tail2)) => {if (head1 == head2) hasSubsequence(tail1, tail2)
+                                                      else (hasSubsequence(tail1, Cons(head2, tail2)))}
+    case (Nil, _) => false
+  }
 }

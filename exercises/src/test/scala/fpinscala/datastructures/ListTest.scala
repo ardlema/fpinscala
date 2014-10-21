@@ -233,4 +233,17 @@ class ListTest extends FlatSpec with Matchers {
     myZippedStringList should be(expectedStringList)
   }
 
+  it should "find out whether a list contains another list as a subsequence" in {
+    val myIntegerList = List(1,2,3,4)
+    val subsequenceList1 = List(1,2)
+    val subsequenceList2 = List(2,3)
+    val subsequenceList3 = List(4)
+    val nonSubsequenceList = List(8,9)
+
+    List.hasSubsequence(myIntegerList, subsequenceList1) should be(true)
+    List.hasSubsequence(myIntegerList, subsequenceList2) should be(true)
+    List.hasSubsequence(myIntegerList, subsequenceList3) should be(true)
+    List.hasSubsequence(myIntegerList, nonSubsequenceList) should be(false)
+  }
+
 }
