@@ -21,4 +21,9 @@ object Tree {
 
     findOutMaximum(tree, 0)
   }
+
+  def depth[A](tree: Tree[A]): Int = tree match {
+    case Leaf(_) => 0
+    case Branch(left, right) => 1 + (depth(left) max depth(right))
+  }
 }

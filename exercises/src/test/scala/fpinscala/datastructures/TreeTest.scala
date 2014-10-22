@@ -21,4 +21,18 @@ class TreeTest extends FlatSpec with Matchers {
     val maximumNumber = Tree.maximum(tree)
     maximumNumber should be(4)
   }
+
+  it should "returns the maximum depth in a Tree" in {
+    val leaf1 = Leaf(1)
+    val leaf2 = Leaf(2)
+    val leaf3 = Leaf(3)
+    val leaf5 = Leaf(5)
+    val leaf6 = Leaf(6)
+    val rightChildBranch2 = Branch(leaf5, leaf6)
+    val rightChildBranch1 = Branch(leaf3, rightChildBranch2)
+    val leftChildBranch = Branch(leaf1, leaf2)
+    val tree = Branch(leftChildBranch, rightChildBranch1)
+    val depth = Tree.depth(tree)
+    depth should be(3)
+  }
 }
