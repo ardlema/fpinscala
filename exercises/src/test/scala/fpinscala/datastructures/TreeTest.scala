@@ -35,4 +35,20 @@ class TreeTest extends FlatSpec with Matchers {
     val depth = Tree.depth(tree)
     depth should be(3)
   }
+
+  it should "apply the function passed to all the elements of the Tree" in {
+    val treePlusOne = Tree.map(tree)(element => element * 2)
+    treePlusOne match {
+      case Leaf(_) => fail()
+      case Branch(left, right) => (left, right) match {
+        case (Leaf(_), Leaf(_)) => fail()
+        case (Branch(leaf1, leaf2), Branch(leaf3, leaf4)) => {
+          leaf1 should be(Leaf(2))
+          leaf2 should be(Leaf(4))
+          leaf3 should be(Leaf(6))
+          leaf4 should be(Leaf(8))
+        }
+      }
+    }
+  }
 }
