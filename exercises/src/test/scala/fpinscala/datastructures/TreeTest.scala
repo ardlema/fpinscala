@@ -51,4 +51,28 @@ class TreeTest extends FlatSpec with Matchers {
       }
     }
   }
+
+  it should "count the number of elements using fold" in {
+    val numberOfNodes = Tree.numberOfNodesWithFold(tree)
+    numberOfNodes should be(7)
+  }
+
+  it should "returns the maximum element in a Tree using fold" in {
+    val maximumNumber = Tree.maximumWithFold(tree)
+    maximumNumber should be(4)
+  }
+
+  it should "returns the maximum depth in a Tree using fold" in {
+    val leaf1 = Leaf(1)
+    val leaf2 = Leaf(2)
+    val leaf3 = Leaf(3)
+    val leaf5 = Leaf(5)
+    val leaf6 = Leaf(6)
+    val rightChildBranch2 = Branch(leaf5, leaf6)
+    val rightChildBranch1 = Branch(leaf3, rightChildBranch2)
+    val leftChildBranch = Branch(leaf1, leaf2)
+    val tree = Branch(leftChildBranch, rightChildBranch1)
+    val depth = Tree.depthWithFold(tree)
+    depth should be(3)
+  }
 }
