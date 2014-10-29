@@ -22,7 +22,10 @@ sealed trait Option[+A] {
     case Some(e) => Some(e)
   }
 
-  def filter(f: A => Boolean): Option[A] = sys.error("todo")
+  def filter(f: A => Boolean): Option[A] = this match {
+    case Some(a) if f(a) => this
+    case _ => None
+  }
 }
 case class Some[+A](get: A) extends Option[A]
 case object None extends Option[Nothing]

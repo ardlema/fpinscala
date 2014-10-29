@@ -51,4 +51,13 @@ class OptionTest extends FlatSpec with Matchers {
 
     orElseNone should be(Some(2))
   }
+
+  it should "convert Some to None if the value doesn’t satisfy f." in {
+    val someInteger = Some(5)
+    val someIntegerFilteredTrue = someInteger.filter(element => element > 2)
+    val someIntegerFilteredFalse = someInteger.filter(element => element > 10)
+
+    someIntegerFilteredTrue should be(Some(5))
+    someIntegerFilteredFalse should be(None)
+  }
 }
