@@ -60,4 +60,11 @@ class OptionTest extends FlatSpec with Matchers {
     someIntegerFilteredTrue should be(Some(5))
     someIntegerFilteredFalse should be(None)
   }
+
+  it should "work out the variance" in {
+    val someSequence = Seq[Double](600, 470, 170, 430, 300)
+    val variance = Option.variance(someSequence)
+
+    variance should be(Some(21704))
+  }
 }
