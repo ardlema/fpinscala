@@ -67,4 +67,19 @@ class OptionTest extends FlatSpec with Matchers {
 
     variance should be(Some(21704))
   }
+
+  it should "combine two Option values using a binary function, If either Option value is None, then the return value is too" in {
+    def addTwoInteger(integer1: Int, integer2: Int): Double = 2.0
+    val someValue = Some(3)
+    val noneValue = None
+    val optionsCombined = Option.map2(someValue, noneValue)(addTwoInteger)
+
+    optionsCombined should be(None)
+
+    val someValue2 = Some(3)
+    val noneValue2 = Some(4)
+    val optionsCombined2 = Option.map2(someValue2, noneValue2)(addTwoInteger)
+
+    optionsCombined2 should be(Some(2.0))
+  }
 }
