@@ -1,6 +1,7 @@
 package fpinscala.errorhandling
 
 import org.scalatest._
+import scala.util.Try
 
 class OptionTest extends FlatSpec with Matchers {
 
@@ -93,5 +94,12 @@ class OptionTest extends FlatSpec with Matchers {
     val sequenceListWithoutNones = Option.sequence(listWithSomes)
 
     sequenceListWithoutNones should be(Some(List(3, 1, 2)))
+  }
+
+  it should "traverse a list and apply a function" in {
+    /*val listWithNone = List("1", "2", "hola")
+    val traverseListWithNone = Option.traverse[String, Int](listWithNone)(i => Some(i.toInt))
+
+    traverseListWithNone should be(None)*/
   }
 }

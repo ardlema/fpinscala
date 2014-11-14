@@ -55,9 +55,6 @@ object Option {
   def variance(xs: Seq[Double]): Option[Double] = mean(xs) flatMap (m => mean(xs.map(x => math.pow(x - m, 2))))
 
   def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = {
-    val optionList: Option[List[Int]] = Some(List(1) :+ 1)
-
-    val element = List(1,2,3) :+ 4
     a flatMap (aa => b map (bb => f(aa, bb)))
   }
 
@@ -67,5 +64,8 @@ object Option {
   }
 
 
-  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = sys.error("todo")
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
+    case h :: t => map2(f(h), traverse(t)(f))(_::_)
+    case Nil => Some(Nil)
+  }
 }
