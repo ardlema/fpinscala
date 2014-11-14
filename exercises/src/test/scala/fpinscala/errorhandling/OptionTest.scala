@@ -82,4 +82,16 @@ class OptionTest extends FlatSpec with Matchers {
 
     optionsCombined2 should be(Some(2.0))
   }
+
+  it should "combine a list of Options into one Option containing a list of all the Some values in the original list" in {
+    val listWithNone = List(Some(3), None, Some(1))
+    val sequenceListWithNone = Option.sequence(listWithNone)
+
+    sequenceListWithNone should be(None)
+
+    val listWithSomes = List(Some(3), Some(1), Some(2))
+    val sequenceListWithoutNones = Option.sequence(listWithSomes)
+
+    sequenceListWithoutNones should be(Some(List(3, 1, 2)))
+  }
 }
