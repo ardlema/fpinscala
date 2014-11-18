@@ -16,15 +16,15 @@ class EitherTest extends FlatSpec with Matchers {
     leftValueMapped should be(Left(5))
   }
 
-  /*it should "returns the result inside the Some case of the Option, or if the Option is None, returns the given default value" in {
-    val someInteger = Some(3)
-    val someIntegerGetOrElse = someInteger.getOrElse(4)
+  it should "implement the flatmap method" in {
+    val rightValue = Right(2)
+    val rightValueFlatMapped = rightValue.flatMap(element => Right(element * 2))
 
-    someIntegerGetOrElse should be(3)
+    rightValueFlatMapped should be(Right(4))
 
-    val someNone = None
-    val someNoneGetOrElse = someNone.getOrElse(4)
+    /*val leftValue = Left(5)
+    val leftValueMapped = leftValue.map(element => element)
 
-    someNoneGetOrElse should be(4)
-  }*/
+    leftValueMapped should be(Left(5))*/
+  }
 }
