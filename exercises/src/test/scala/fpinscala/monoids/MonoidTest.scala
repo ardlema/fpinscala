@@ -44,4 +44,16 @@ class MonoidTest
     val booleanResult4 = booleanAnd.op(true, true)
     booleanResult4 should be(true)
   }
+
+  it should "give a monoid instance for combining Option values" in {
+    val monoidOption = optionMonoid[Int]
+    val someElement1 = monoidOption.op(Some(1), None)
+    someElement1 should be(Some(1))
+
+    val someElement2 = monoidOption.op(None, Some(2))
+    someElement2 should be(Some(2))
+
+    val noneElement = monoidOption.op(None, None)
+    noneElement should be(None)
+  }
 }

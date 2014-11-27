@@ -40,9 +40,12 @@ object Monoid {
     val zero = false
   }
 
-  /*def optionMonoid[A]: Monoid[Option[A]] = sys.error("todo")
+  def optionMonoid[A]: Monoid[Option[A]] = new Monoid[Option[A]] {
+    def op(a1: Option[A], a2: Option[A]) = a1 orElse a2
+    val zero = None
+  }
 
-  def endoMonoid[A]: Monoid[A => A] = sys.error("todo")*/
+  /*def endoMonoid[A]: Monoid[A => A] = sys.error("todo")*/
 
   // TODO: Placeholder for `Prop`. Remove once you have implemented the `Prop`
   // data type from Part 2.
