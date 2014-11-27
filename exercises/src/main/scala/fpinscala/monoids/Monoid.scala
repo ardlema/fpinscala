@@ -20,17 +20,29 @@ object Monoid {
     val zero = Nil
   }
 
-  val intAddition: Monoid[Int] = sys.error("todo")
+  val intAddition: Monoid[Int] = new Monoid[Int] {
+    def op(a1: Int, a2: Int) = a1 + a2
+    val zero = 0
+  }
 
-  val intMultiplication: Monoid[Int] = sys.error("todo")
+  val intMultiplication: Monoid[Int] = new Monoid[Int] {
+    def op(a1: Int, a2: Int) = a1 * a2
+    val zero = 1
+  }
 
-  val booleanOr: Monoid[Boolean] = sys.error("todo")
+  val booleanOr: Monoid[Boolean] = new Monoid[Boolean] {
+    def op(a1: Boolean, a2: Boolean) = a1 || a2
+    val zero = false
+  }
 
-  val booleanAnd: Monoid[Boolean] = sys.error("todo")
+  val booleanAnd: Monoid[Boolean] = new Monoid[Boolean] {
+    def op(a1: Boolean, a2: Boolean) = a1 && a2
+    val zero = false
+  }
 
-  def optionMonoid[A]: Monoid[Option[A]] = sys.error("todo")
+  /*def optionMonoid[A]: Monoid[Option[A]] = sys.error("todo")
 
-  def endoMonoid[A]: Monoid[A => A] = sys.error("todo")
+  def endoMonoid[A]: Monoid[A => A] = sys.error("todo")*/
 
   // TODO: Placeholder for `Prop`. Remove once you have implemented the `Prop`
   // data type from Part 2.
@@ -73,7 +85,7 @@ object Monoid {
   def parFoldMap[A,B](v: IndexedSeq[A], m: Monoid[B])(f: A => B): Par[B] = 
     sys.error("todo") 
 
-  val wcMonoid: Monoid[WC] = sys.error("todo")
+  lazy val wcMonoid: Monoid[WC] = sys.error("todo")
 
   def count(s: String): Int = sys.error("todo")
 
