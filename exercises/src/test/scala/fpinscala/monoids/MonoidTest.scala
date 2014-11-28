@@ -58,12 +58,18 @@ class MonoidTest
   }
 
   it should "give a general function concatenate" in {
-    val myList = List(1,2,3)
+    val myList = List(1, 2, 3)
     val myContatenatedIntList = concatenate(myList, intAddition)
     myContatenatedIntList should be(6)
 
-    val myListString = List("a","b","c")
+    val myListString = List("a", "b", "c")
     val myContatenatedStringList = concatenate(myListString, stringMonoid)
     myContatenatedStringList should be("abc")
+  }
+
+  it should "implement foldmap" in {
+    val myList = List(1.0,2.0,3.0)
+    val myContatenatedDoubleList = foldMap(myList, stringMonoid)(elem => elem.toString)
+    myContatenatedDoubleList should be("1.02.03.0")
   }
 }
