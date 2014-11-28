@@ -56,4 +56,14 @@ class MonoidTest
     val noneElement = monoidOption.op(None, None)
     noneElement should be(None)
   }
+
+  it should "give a general function concatenate" in {
+    val myList = List(1,2,3)
+    val myContatenatedIntList = concatenate(myList, intAddition)
+    myContatenatedIntList should be(6)
+
+    val myListString = List("a","b","c")
+    val myContatenatedStringList = concatenate(myListString, stringMonoid)
+    myContatenatedStringList should be("abc")
+  }
 }

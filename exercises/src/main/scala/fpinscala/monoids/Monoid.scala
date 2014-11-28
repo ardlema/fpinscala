@@ -45,7 +45,14 @@ object Monoid {
     val zero = None
   }
 
-  /*def endoMonoid[A]: Monoid[A => A] = sys.error("todo")*/
+  def endoMonoid[A]: Monoid[A => A] = new Monoid[A => A] {
+    def op(a1: A => A, a2: A => A) = a1 compose a2
+    val zero = (a: A) => a
+  }
+
+  def concatenate[A](as: List[A], m: Monoid[A]): A = {
+    as.foldLeft(m.zero)(m.op)
+  }
 
   // TODO: Placeholder for `Prop`. Remove once you have implemented the `Prop`
   // data type from Part 2.
@@ -56,14 +63,13 @@ object Monoid {
 
   import fpinscala.testing._
   import Prop._
-  def monoidLaws[A](m: Monoid[A], gen: Gen[A]): Prop = sys.error("todo")
+  //def monoidLaws[A](m: Monoid[A], gen: Gen[A]): Prop = sys.error("todo")
 
-  def trimMonoid(s: String): Monoid[String] = sys.error("todo")
+  //def trimMonoid(s: String): Monoid[String] = sys.error("todo")
 
-  def concatenate[A](as: List[A], m: Monoid[A]): A =
-    sys.error("todo")
 
-  def foldMap[A, B](as: List[A], m: Monoid[B])(f: A => B): B =
+
+  /*def foldMap[A, B](as: List[A], m: Monoid[B])(f: A => B): B =
     sys.error("todo")
 
   def foldRight[A, B](as: List[A])(z: B)(f: (A, B) => B): B =
@@ -76,7 +82,7 @@ object Monoid {
     sys.error("todo")
 
   def ordered(ints: IndexedSeq[Int]): Boolean =
-    sys.error("todo")
+    sys.error("todo")*/
 
   sealed trait WC
   case class Stub(chars: String) extends WC
