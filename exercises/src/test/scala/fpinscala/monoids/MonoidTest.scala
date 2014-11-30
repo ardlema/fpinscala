@@ -72,4 +72,16 @@ class MonoidTest
     val myContatenatedDoubleList = foldMap(myList, stringMonoid)(elem => elem.toString)
     myContatenatedDoubleList should be("1.02.03.0")
   }
+
+  it should "implement foldright using foldmap" in {
+    val myList = List(1,2,3)
+    val listTotal = foldRight(myList)(0)(_ + _)
+    listTotal should be(6)
+  }
+
+  /*it should "implement foldleft using foldmap" in {
+    val myList = List(1,2,3)
+    val listTotal = foldLeft(myList)(0)(_ + _)
+    listTotal should be(6)
+  }*/
 }
