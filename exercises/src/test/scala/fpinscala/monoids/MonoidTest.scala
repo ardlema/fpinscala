@@ -79,9 +79,9 @@ class MonoidTest
     listTotal should be(6)
   }
 
-  /*it should "implement foldleft using foldmap" in {
+  it should "implement foldleft using foldmap" in {
     val myList = List(1,2,3)
     val listTotal = foldLeft(myList)(0)(_ + _)
     listTotal should be(6)
-  }*/
+  }
 }
