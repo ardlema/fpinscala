@@ -27,4 +27,16 @@ class EitherTest extends FlatSpec with Matchers {
 
     leftValueMapped should be(Left(5))*/
   }
+
+  it should "implement the orElse method" in {
+    val rightValue = Right(2)
+    val rightValueFlatMapped = rightValue.orElse(Right(4))
+
+    rightValueFlatMapped should be(Right(2))
+
+    val leftValue = Left(5)
+    val leftValueMapped = leftValue.orElse(Right(2))
+
+    leftValueMapped should be(Right(2))
+  }
 }

@@ -9,14 +9,15 @@ sealed trait Either[+E,+A] {
    case Left(ex) => Left(ex)
  }
 
-
-
  def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] = this match {
    case Right(element) => f(element)
    case Left(ex) => Left(ex)
  }
 
- def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] = sys.error("todo")
+ def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] = this match {
+   case Right(element) => Right(element)
+   case Left(ex) => b
+ }
 
  def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] = sys.error("todo")
 }
