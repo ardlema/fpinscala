@@ -84,4 +84,18 @@ class MonoidTest
     val listTotal = foldLeft(myList)(0)(_ + _)
     listTotal should be(6)
   }
+
+  it should "implement foldmap for IndexedSeq" in {
+    val zeroElementsIndexedSeq = IndexedSeq()
+    val zeroListTotal = foldMapV(zeroElementsIndexedSeq, stringMonoid)(elem => elem.toString)
+    zeroListTotal should be("")
+
+    val mySimpleIndexedSeq = IndexedSeq(1.0)
+    val simpleListTotal = foldMapV(mySimpleIndexedSeq, stringMonoid)(elem => elem.toString)
+    simpleListTotal should be("1.0")
+
+    val myIndexedSeq = IndexedSeq(1.0,2.0,3.0)
+    val listTotal = foldMapV(myIndexedSeq, stringMonoid)(elem => elem.toString)
+    listTotal should be("1.02.03.0")
+  }
 }
