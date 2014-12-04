@@ -98,4 +98,14 @@ class MonoidTest
     val listTotal = foldMapV(myIndexedSeq, stringMonoid)(elem => elem.toString)
     listTotal should be("1.02.03.0")
   }
+
+  it should "detect whether an IndexedSeq is ordered" in {
+    val orderedSeq = IndexedSeq(1, 2, 3)
+    val isOrdered1 = ordered(orderedSeq)
+    isOrdered1 should be(true)
+
+    val notOrderedSeq = IndexedSeq(4, 2, 7)
+    val isOrdered2 = ordered(notOrderedSeq)
+    isOrdered2 should be(false)
+  }
 }

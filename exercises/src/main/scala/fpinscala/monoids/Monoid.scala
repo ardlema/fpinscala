@@ -90,8 +90,28 @@ object Monoid {
     m.op(foldMap(half1.toList, m)(f), foldMap(half2.toList, m)(f))
   }
 
-  def ordered(ints: IndexedSeq[Int]): Boolean =
-    sys.error("todo")
+  val booleanOrdered: Monoid[Boolean] = new Monoid[Boolean] {
+    def op(a1: Boolean, a2: Boolean) = a1 && a2
+    val zero = false
+  }
+
+  case class Element(element1: Int, element2: Int) {
+    val greaterThan = element1 > element2
+  }
+
+  val comparatorMonoid = new Monoid[Option[(Int, Int, Boolean)]] {
+    def op(o1: Option[(Int, Int, Boolean)], o2: Option[(Int, Int, Boolean)]) =
+      (o1, o2) match {
+        // The ranges should not overlap if the sequence is ordered.
+        case (Some((x1, y1, p)), Some((x2, y2, q))) =>
+          Some((x1 min x2, y1 max y2, p && q && y1 <= x2))
+        case (x, None) => x
+        case (None, x) => x
+      }
+    val zero = None
+  }
+
+  def ordered(ints: IndexedSeq[Int]): Boolean = foldMapV(ints, comparatorMonoid)(i => Some((i, i, true))).map(_._3).getOrElse(true)
 
   sealed trait WC
   case class Stub(chars: String) extends WC
