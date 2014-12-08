@@ -2,6 +2,7 @@ package fpinscala.monoids
 
 import fpinscala.parallelism.Nonblocking._
 import fpinscala.parallelism.Nonblocking.Par.toParOps // infix syntax for `Par.map`, `Par.flatMap`, etc
+import scala.collection.immutable.StringOps._
 
 trait Monoid[A] {
   def op(a1: A, a2: A): A
@@ -133,7 +134,15 @@ object Monoid {
     val zero = Stub("")
   }
 
-  def count(s: String): Int = sys.error("todo")
+  def count(s: String): Int = s match {
+    case "" => 0
+    case string => {
+      val splittedString = string.splitAt(string.length / 2)
+      count(splittedString._1) + count(splittedString._2)
+      val monoid = wcMonoid.op()
+      count()
+    }
+  }
 
   def productMonoid[A,B](A: Monoid[A], B: Monoid[B]): Monoid[(A, B)] =
     sys.error("todo")

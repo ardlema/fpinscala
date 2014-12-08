@@ -17,4 +17,9 @@ class WordCountTest
     val wcMonoid3 = wcMonoid.op(Part("lorem", 0, ""), Part("", 0, "do"))
     wcMonoid2 should be(Part("lorem", 1, "do"))
   }
+
+  it should "count the number of words in a String" in {
+    val stringToBeCounted = "this is the string to be counted"
+    count(stringToBeCounted) should be(7)
+  }
 }
