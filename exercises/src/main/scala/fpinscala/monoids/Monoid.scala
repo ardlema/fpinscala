@@ -124,9 +124,11 @@ object Monoid {
   def parFoldMap[A,B](v: IndexedSeq[A], m: Monoid[B])(f: A => B): Par[B] = 
     sys.error("todo")
 
+
   lazy val wcMonoid: Monoid[WC] = new Monoid[WC] {
     def op(a1: WC, a2: WC) = (a1, a2) match {
-      case (Part(lStub1, words1, rStub1), Part(lStub2, words2, rStub2)) => Part(lStub1, words1 + words2, rStub2)
+      case (Part(lStub1, words1, rStub1), Part(lStub2, words2, rStub2)) =>
+        Part(lStub1, words1 + (if ((rStub1 + lStub2).isEmpty) 0 else 1) + words2, rStub2)
       case (Stub(string1), Part(lStub2, words2, rStub2)) => Part(string1.concat(lStub2), words2, rStub2)
       case (Part(lStub1, words1, rStub1), Stub(string2)) => Part(lStub1, words1, rStub1.concat(string2))
       case (Stub(string1), Stub(string2)) => Stub(string1.concat(string2))
@@ -134,13 +136,19 @@ object Monoid {
     val zero = Stub("")
   }
 
-  def count(s: String): Int = s match {
-    case "" => 0
-    case string => {
-      val splittedString = string.splitAt(string.length / 2)
-      count(splittedString._1) + count(splittedString._2)
-      val monoid = wcMonoid.op()
-      count()
+  def count(s: String): Int = {
+    // A single character's count. Whitespace does not count,
+    // and non-whitespace starts a new Stub.
+    def wc(c: Char): WC =
+      if (c.isWhitespace)
+        Part("", 0, "")
+      else
+        Stub(c.toString)
+    // `unstub(s)` is 0 if `s` is empty, otherwise 1.
+    def unstub(s: String) = s.length min 1
+    foldMapV(s.toIndexedSeq, wcMonoid)(wc) match {
+      case Stub(s) => unstub(s)
+      case Part(l, w, r) => unstub(l) + w + unstub(r)
     }
   }
 
