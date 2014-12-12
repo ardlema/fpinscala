@@ -185,8 +185,8 @@ trait Foldable[F[_]] {
 }
 
 object ListFoldable extends Foldable[List] {
-  override def foldRight[A, B](as: List[A])(z: B)(f: (A, B) => B) =
-    sys.error("todo")
+  override def foldRight[A, B](as: List[A])(z: B)(f: (A, B) => B) = as.foldRight(z)(f)
+
   override def foldLeft[A, B](as: List[A])(z: B)(f: (B, A) => B) =
     sys.error("todo")
   override def foldMap[A, B](as: List[A])(f: A => B)(mb: Monoid[B]): B =
