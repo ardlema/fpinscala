@@ -3,7 +3,7 @@ package fpinscala.monoids
 import fpinscala.monoids.Monoid._
 import org.scalatest._
 
-class FoldableTest
+class FoldableListTest
   extends FlatSpec
   with Matchers {
 
