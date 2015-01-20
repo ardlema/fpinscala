@@ -108,4 +108,14 @@ class MonoidTest
     val isOrdered2 = ordered(notOrderedSeq)
     isOrdered2 should be(false)
   }
+
+  it should "merge two maps" in {
+    val map1: Map[Int, Long] = Map(1 -> 1, 2 -> 1, 3 -> 0)
+    val map2: Map[Int, Long] = Map(2 -> 1)
+
+    val monoid: Monoid[Map[Int, Long]] = mapMergeMonoid(longOr)
+
+    val map3 = monoid.op(map1, map2)
+    println(map3)
+  }
 }
