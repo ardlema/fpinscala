@@ -294,7 +294,7 @@ object SimpleStreamTransducers {
         Await[I,I] {
           case Some(i) if count < n => emit(i, go(count+1))
           case _ => Halt()
-        }.repeat
+        }
       go(0)
     }
 
