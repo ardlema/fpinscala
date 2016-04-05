@@ -21,4 +21,12 @@ class StreamingIOTest extends FlatSpec with Matchers {
     listWithoutThreeFirstElements.size shouldBe(3)
     listWithoutThreeFirstElements should contain theSameElementsAs(List(4,5,6))
   }
+
+  it should "implement the take while function" in {
+    val dropFunction = takeWhile[Int](e => e < 5)
+    val listWithElementsLessThanFive = dropFunction(Stream(1,2,3,4,5,6)).toList
+
+    listWithElementsLessThanFive.size shouldBe(4)
+    listWithElementsLessThanFive should contain theSameElementsAs(List(1,2,3,4))
+  }
 }

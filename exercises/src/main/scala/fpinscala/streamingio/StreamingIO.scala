@@ -303,7 +303,9 @@ object SimpleStreamTransducers {
       else await(i => drop[I](n-1))
 
 
-    def takeWhile[I](f: I => Boolean): Process[I,I] = ???
+    def takeWhile[I](f: I => Boolean): Process[I,I] =
+      await(i => if (f(i)) emit(i, takeWhile(f)) else Halt())
+
 
     def dropWhile[I](f: I => Boolean): Process[I,I] = ???
 
