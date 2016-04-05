@@ -13,4 +13,12 @@ class StreamingIOTest extends FlatSpec with Matchers {
     firstTwoElements.size shouldBe(2)
     firstTwoElements should contain theSameElementsAs(List("hola", "adios"))
   }
+
+  it should "implement the drop function" in {
+    val dropFunction = drop[Int](3)
+    val listWithoutThreeFirstElements = dropFunction(Stream(1,2,3,4,5,6)).toList
+
+    listWithoutThreeFirstElements.size shouldBe(3)
+    listWithoutThreeFirstElements should contain theSameElementsAs(List(4,5,6))
+  }
 }
