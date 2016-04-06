@@ -29,4 +29,12 @@ class StreamingIOTest extends FlatSpec with Matchers {
     listWithElementsLessThanFive.size shouldBe(4)
     listWithElementsLessThanFive should contain theSameElementsAs(List(1,2,3,4))
   }
+
+  it should "implement the drop while function" in {
+    val dropFunction = dropWhile[Int](e => e < 4)
+    val listWithElementsLessThanFive = dropFunction(Stream(1,2,3,4,5,6)).toList
+
+    listWithElementsLessThanFive.size shouldBe(3)
+    listWithElementsLessThanFive should contain theSameElementsAs(List(4,5,6))
+  }
 }
