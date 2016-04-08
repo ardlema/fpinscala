@@ -39,10 +39,16 @@ class StreamingIOTest extends FlatSpec with Matchers {
   }
 
   it should "implement the count function" in {
-    val countFunction = count[String]
     val listWithCountElements = count(Stream("a", "b", "c")).toList
 
     listWithCountElements.size shouldBe(3)
     listWithCountElements should contain theSameElementsAs(List(1, 2, 3))
+  }
+
+  it should "implement the mean function" in {
+    val listWithMeanElements = mean(Stream(2, 4, 6)).toList
+
+    listWithMeanElements.size shouldBe(3)
+    listWithMeanElements should contain theSameElementsAs(List(2.0, 3.0, 4.0))
   }
 }
