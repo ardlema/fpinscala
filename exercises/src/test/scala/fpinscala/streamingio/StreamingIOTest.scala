@@ -37,4 +37,12 @@ class StreamingIOTest extends FlatSpec with Matchers {
     listWithElementsLessThanFive.size shouldBe(3)
     listWithElementsLessThanFive should contain theSameElementsAs(List(4,5,6))
   }
+
+  it should "implement the count function" in {
+    val countFunction = count[String]
+    val listWithCountElements = count(Stream("a", "b", "c")).toList
+
+    listWithCountElements.size shouldBe(3)
+    listWithCountElements should contain theSameElementsAs(List(1, 2, 3))
+  }
 }

@@ -318,12 +318,9 @@ object SimpleStreamTransducers {
     /*
      * Exercise 2: Implement `count`.
      */
-    def count[I]: Process[I,Int] = ???
-
-    /* For comparison, here is an explicit recursive implementation. */
-    def count2[I]: Process[I,Int] = {
-      def go(n: Int): Process[I,Int] =
-        await((i: I) => emit(n+1, go(n+1)))
+    def count[I]: Process[I,Int] = {
+      def go(count: Int): Process[I,Int] =
+        await(i => emit(count + 1, go(count + 1)))
       go(0)
     }
 
