@@ -27,7 +27,7 @@ class StreamingIOTest extends FlatSpec with Matchers {
     val listWithElementsLessThanFive = dropFunction(Stream(1,2,3,4,5,6)).toList
 
     listWithElementsLessThanFive.size shouldBe(4)
-    listWithElementsLessThanFive should contain theSameElementsAs(List(1,2,3,4))
+    listWithElementsLessThanFive should contain theSameElementsAs(List(1, 2, 3, 4))
   }
 
   it should "implement the drop while function" in {
@@ -35,7 +35,7 @@ class StreamingIOTest extends FlatSpec with Matchers {
     val listWithElementsLessThanFive = dropFunction(Stream(1,2,3,4,5,6)).toList
 
     listWithElementsLessThanFive.size shouldBe(3)
-    listWithElementsLessThanFive should contain theSameElementsAs(List(4,5,6))
+    listWithElementsLessThanFive should contain theSameElementsAs(List(4, 5, 6))
   }
 
   it should "implement the count function" in {
@@ -50,5 +50,12 @@ class StreamingIOTest extends FlatSpec with Matchers {
 
     listWithMeanElements.size shouldBe(3)
     listWithMeanElements should contain theSameElementsAs(List(2.0, 3.0, 4.0))
+  }
+
+  it should "implement the sum function in terms of loop" in {
+    val listWithSum = sumInTermsOfLoop(Stream(1, 2, 3)).toList
+
+    listWithSum.size shouldBe(3)
+    listWithSum should contain theSameElementsAs(List(1.0, 3.0, 6.0))
   }
 }
