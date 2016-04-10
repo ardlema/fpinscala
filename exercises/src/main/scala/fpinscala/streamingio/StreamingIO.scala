@@ -342,7 +342,8 @@ object SimpleStreamTransducers {
     def sumInTermsOfLoop: Process[Double,Double] =
       loop[Double, Double, Double](0.0)((d, acc) => (d+acc, d+acc))
 
-    def count2[I]: Process[I,Int] = ???
+    def countInTermsOfLoop[I]: Process[I,Int] =
+      loop[Int, I, Int](0)((_, acc) => (acc + 1, acc + 1))
 
     /*
      * Exercise 7: Can you think of a generic combinator that would

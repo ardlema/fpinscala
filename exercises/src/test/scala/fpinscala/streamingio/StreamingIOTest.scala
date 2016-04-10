@@ -58,4 +58,11 @@ class StreamingIOTest extends FlatSpec with Matchers {
     listWithSum.size shouldBe(3)
     listWithSum should contain theSameElementsAs(List(1.0, 3.0, 6.0))
   }
+
+  it should "implement the count function in terms of loop" in {
+    val listWithCount = countInTermsOfLoop(Stream("hello", "house", "car", "tree")).toList
+
+    listWithCount.size shouldBe(4)
+    listWithCount should contain theSameElementsAs(List(1, 2, 3, 4))
+  }
 }
