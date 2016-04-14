@@ -133,7 +133,17 @@ object SimpleStreamTransducers {
     /*
      * Exercise 5: Implement `|>`. Let the types guide your implementation.
      */
-    def |>[O2](p2: Process[O,O2]): Process[I,O2] = ???
+    def |>[O2](p2: Process[O,O2]): Process[I,O2] = {
+      p2 match {
+        case Halt() => Halt()
+        case Emit(h,t) => Emit(h, this |> t)
+        case Await(f) => this match {
+          case Emit(h,t) => t |> f(Some(h))
+          case Halt() => Halt() |> f(None)
+          case Await(g) => Await((i: Option[I]) => g(i) |> p2)
+        }
+      }
+    }
 
     /*
      * Feed `in` to this `Process`. Uses a tail recursive loop as long
@@ -370,7 +380,11 @@ object SimpleStreamTransducers {
      * We choose to emit all intermediate values, and not halt.
      * See `existsResult` below for a trimmed version.
      */
-    def exists[I](f: I => Boolean): Process[I,Boolean] = ???
+    def exists[I](f: I => Boolean): Process[I,Boolean] = lift(f) |> any
+
+    /* Emits whether a `true` input has ever been received. */
+    def any: Process[Boolean,Boolean] =
+      loop(false)((b:Boolean,s) => (s || b, s || b))
 
     /* Awaits then emits a single value, then halts. */
     def echo[I]: Process[I,I] = await(i => emit(i))
