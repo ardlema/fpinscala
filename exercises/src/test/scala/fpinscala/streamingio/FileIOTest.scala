@@ -21,10 +21,10 @@ class FileIOTest extends FlatSpec with Matchers {
   }
 
   it should "find out where a file contains fewer than x lines" in {
-    val ioBoolean = processFile(file, count |> exists(_ > 2), true)(_ || _)
+    val ioBoolean = processFile(file, count |> exists(_ > 10), false)(_ || _)
     val result = unsafePerformIO(ioBoolean)
 
-    result shouldBe(true)
+    result shouldBe(false)
   }
 }
 
